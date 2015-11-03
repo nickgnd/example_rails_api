@@ -45,7 +45,7 @@ module Warden
           Warden::Manager._run_callbacks(:before_failure, env, result)
 
           status, headers, body = warden.config[:failure_app].call(env).to_a
-          @controller.send :render, status: status, text: body,
+          @controller.send :render, status: status, plain: body,
             content_type: headers['Content-Type'], location: headers['Location']
 
           nil
