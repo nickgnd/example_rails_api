@@ -2,8 +2,10 @@ module WardenHelper
   extend ActiveSupport::Concern
 
   included do
-    helper_method :warden, :current_user
-
+    # see https://github.com/plataformatec/devise/pull/3732/files
+    if respond_to?(:helper_method)
+      helper_method :warden, :current_user
+    end
     prepend_before_action :authenticate!
   end
 
