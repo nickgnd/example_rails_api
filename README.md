@@ -1,7 +1,26 @@
 # README
 
-[![Code Climate](https://codeclimate.com/github/lucatironi/example_rails_api/badges/gpa.svg)](https://codeclimate.com/github/lucatironi/example_rails_api) [![Test Coverage](https://codeclimate.com/github/lucatironi/example_rails_api/badges/coverage.svg)](https://codeclimate.com/github/lucatironi/example_rails_api/coverage) [![Build Status](https://travis-ci.org/lucatironi/example_rails_api.svg?branch=master)](https://travis-ci.org/lucatironi/example_rails_api)
+Fork of the original project of Luca Tironi https://github.com/lucatironi/example_rails_api
 
-A simple experiment to create an API with rails-api, authentication strategy with Warden, RSpec tests and CORS headers.
+The original version is with Rails4 and all works fine.
+With **Rails 5alpha** there is a problem with **Warden stub** for controller test (spec/support/warden.rb), it returns the wrong status response: 200 instead of 401.
 
-A tutorial to explain how to build this example application can be found on [my website](http://lucatironi.github.io/tutorial/2015/08/23/rails_api_authentication_warden/).
+
+1. Clone it!
+2. bundle install
+3. bin/rake db:migrate
+4. bundle exec spring binstub rspec
+5. bin/spec spec/controllers/customers_controller_spec.rb
+--> it returns 200 instead of 401
+
+```bash
+CustomersController behaves like authenticated_api_controller authentiation returns unauthorized request without email and token
+     Failure/Error: expect(response.status).to eq(401)
+       
+       expected: 401
+            got: 200
+       
+       (compared using ==)
+      Shared Example Group: "authenticated_api_controller" called from ./spec/controllers/customers_controller_spec.rb:14
+
+```
